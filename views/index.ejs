@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <nav id="common-nav" class="common-nav">
+        <a href="/provide-counts">Provide Counts</a>
+        <a href="/show-stats">Show Stats</a>
+        <a href="/">Provide Counts</a>
+    </nav>
+
+    <% if (name!=null) {%>
+    <div style="margin-top: 10px">
+            <div style="margin: 10px; border: 1px solid #444; width: fit-content; padding: 10px; border-radius: 6px; max-width: 400px; min-width: 200px;">
+                <div>
+                    <h3><%= name %></h3>
+                </div>
+                <div>
+                    <%= points %>
+                </div>
+            </div>
+    </div>
+    <% } %>
+</body>
+</html>
