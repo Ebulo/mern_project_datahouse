@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
-    name: {
+    university: {
         type: String,
         required: true
     },
-    points: {
+    count: {
         type: Number,
         required: true
     },

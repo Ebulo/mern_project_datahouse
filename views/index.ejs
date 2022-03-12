@@ -3,30 +3,36 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Intern's Onboard</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: #000;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 8px;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <nav id="common-nav" class="common-nav">
-        <a href="/provide-counts">Provide Counts</a>
-        <a href="/show-stats">Show Stats</a>
-        <a href="/">Provide Counts</a>
-    </nav>
+    <h1>Intern's Onboard</h1>
+    <nav id="common-nav" class="common-nav" style="display: flex; flex-wrap: wrap;">
+        <!-- Will add approaching colleges and setting orientation as a field in the provide counts -->
+        <a href="/provide-counts">Provide Interns Count</a> 
+        <a href="/show-stats">Show Universities Stats</a>
+        <!-- Will add field to Universities and counts to send resume forms Once clicked on send resume form the university will recieve an email with the link to upload the resume forms of all the candidates -->
+        <a href="/show-resumes">Show Resumes</a>
+        <!-- Show resumes will contain the list of universities and followed by the number of interns who have uploaded their resume forms -->
+        <!-- Each resume uploaded will count as one intern of the mentioned university. -->
+        <!-- Will have a selected or rejected button on the show resume page. -->
+        <a href="/resume">The Resume Form</a>
+        
+        
 
-    <% if (name!=null) {%>
-    <div style="margin-top: 10px">
-            <div style="margin: 10px; border: 1px solid #444; width: fit-content; padding: 10px; border-radius: 6px; max-width: 400px; min-width: 200px;">
-                <div>
-                    <h3><%= name %></h3>
-                </div>
-                <div>
-                    <%= points %>
-                </div>
-            </div>
-    </div>
-    <% } %>
+    </nav>
 </body>
 </html>

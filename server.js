@@ -1,5 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Intern = require('./models/data')
+const Resume = require('./models/intern_form')
 const app = express()
 const router = express.Router()
 
@@ -13,7 +15,7 @@ app.set('view engine', 'ejs')
 
 //Render the Main landing page
 app.get("/", (req, res) => {
-    res.render('index', {name: null, points: null})
+    res.render('index')
 })
 
 // Render the page to initiate adding the data of interns
@@ -23,25 +25,6 @@ app.get("/provide-counts", (req, res) => {
 
 // Show the Statistics of the data entered by the users.
 app.get("/show-stats", async (req, res) => {
-    var dummy_data = [
-        {
-            rows: 10,
-            cols: 10,
-            name: "John Doe",
-            age: 20,
-            resume_path: "/john-doe.pdf",
-            email: "johndoe@gmil.com"
-        },
-        {
-            rows: 10,
-            cols: 10,
-            name: "John Doe 2",
-            age: 20,
-            resume_path: "/john-doe2.pdf",
-            email: "johndoe2@gmil.com"
-        },
-
-    ]
     const intern = await Intern.find()
     console.log(intern);
     res.render('show_stats', {intern: intern})
@@ -69,13 +52,42 @@ app.post('/show-stats/delete/', async (req, res) => {
     res.render('show_stats', {intern: new_interns})
 })
 
-// Adding data to the database
-const Intern = require('./models/data')
+app.get("/show-resumes", (req, res) => {
+    res.render('show_resumes')
+})
+
+app.get("/resume", (req, res) => {
+    res.render('intern_resume')
+})
+
+app.post("/resume/submit/", async (req, res) => {
+    let data = {
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        college: req.body.college, // This will be a dropdown with populated data of colleges names.
+        degree: req.body.degree,
+        year: req.body.year,
+        resume: req.body.resume,
+        gpa: req.body.gpa,
+        criminal_record: true ? req.body.criminal_record == 1 : false
+    }
+    console.log(data);
+    let resume = new Resume(data)
+    const resume_id = await resume.save()
+    .catch(err => {console.log("Error in Resume Submitting: ", err);})
+
+    res.render('thankyou')
+})
+
+
+
+// Initial Phase come to the site and provide a college wide count of the interns
 app.post("/provide-counts/add/", async (req, res) => {
     // console.log("Req: ", req.body);
     var data = {
-        name: req.body.name,
-        points: req.body.points,
+        university: req.body.university,
+        count: req.body.count,
     }
     let intern = new Intern(data)
     try {
@@ -85,8 +97,8 @@ app.post("/provide-counts/add/", async (req, res) => {
         console.log(error)
         res.render('provide_counts', {intern: intern})
     }
-    console.log("Data: ", data);
-    res.render("index", data)
+    // console.log("Data: ", data);
+    res.render("index")
 })
 
 app.listen(5003)
