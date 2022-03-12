@@ -44,7 +44,7 @@ app.get("/show-stats", async (req, res) => {
     ]
     const intern = await Intern.find()
     console.log(intern);
-    res.render('show_stats', intern)
+    res.render('show_stats', {intern: intern})
 })
 
 // Each intern data
@@ -55,6 +55,18 @@ app.get('/show_stats/:id', async (req, res) => {
     if (intern == null) res.redirect('/')
     res.render('show_stats_id', {intern: intern})
     // res.send(req.params.id)
+})
+
+// Each intern data
+app.post('/show-stats/delete/', async (req, res) => {
+    // const intern = await Intern.findById(req.params.id)
+    console.log("id: ", req.body.id);
+    const intern = await Intern.findById(req.body.id)
+    .catch(err => {console.log("Error: ", err);})
+    const _ = await intern.remove()
+    .catch(err => {console.log("Error: ", err);})
+    const new_interns = await Intern.find()
+    res.render('show_stats', {intern: new_interns})
 })
 
 // Adding data to the database

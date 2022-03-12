@@ -10,18 +10,26 @@
 </head>
 <body>
     <h1>Statistics Of the Data</h1>
-    
-    <% if (name!=null) {%>
-        <div style="margin-top: 10px">
-                <div style="margin: 10px; border: 1px solid #444; width: fit-content; padding: 10px; border-radius: 6px; max-width: 400px; min-width: 200px;">
-                    <div>
-                        <h3><%= name %></h3>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        <% intern.forEach(intern_ => {%>
+            <div style="margin-top: 10px">
+                    <div class="data_box" style="margin: 10px; border: 1px solid #444; width: fit-content; padding: 10px; border-radius: 6px; max-width: 400px; min-width: 200px; background: #4441; box-shadow: 0 10px 10px #4444;">
+                        <div>
+                            <h3><%= intern_.name %></h3>
+                        </div>
+                        <div>
+                            <%= intern_.points %>
+                        </div>
+                        <div>
+                            <form action='/show-stats/delete/' method="post">
+                                <input type="hidden" value='<%= intern_._id %>' name="id">
+                                <button type="submit">Delete</button>
+                            </form>
+                            
+                        </div>
                     </div>
-                    <div>
-                        <%= points %>
-                    </div>
-                </div>
-        </div>
-    <% } %>
+            </div>
+        <% }) %>
+    </div>
 </body>
 </html>
