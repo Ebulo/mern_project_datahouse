@@ -11,5 +11,17 @@
 <body>
     <h1>Statistics Of the Data</h1>
     
+    <% if (name!=null) {%>
+        <div style="margin-top: 10px">
+                <div style="margin: 10px; border: 1px solid #444; width: fit-content; padding: 10px; border-radius: 6px; max-width: 400px; min-width: 200px;">
+                    <div>
+                        <h3><%= name %></h3>
+                    </div>
+                    <div>
+                        <%= points %>
+                    </div>
+                </div>
+        </div>
+    <% } %>
 </body>
 </html>
