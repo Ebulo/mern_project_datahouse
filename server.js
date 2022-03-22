@@ -9,7 +9,16 @@ const router = express.Router()
 app.use(express.urlencoded({extended:true}))
 
 const mongodb = 'mongodb+srv://bishant:mongo_bishant1234@hrc-cluster.ikeg2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri = process.env['URI'];
+console.log(uri);
 mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
+// const connection = mongoose.connection(
+//     connection.once('open', () => {
+//         console.log("MongoDB database connection established successfully");
+//     })
+// )
+
+//--> https://github.com/nodejs/node-gyp#on-windows
 
 app.set('view engine', 'ejs')
 
